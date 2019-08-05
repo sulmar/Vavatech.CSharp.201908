@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Vavatech.TrackingSystem.Models;
 
 namespace Vavatech.TrackingSystem.ConsoleClient
@@ -12,19 +13,30 @@ namespace Vavatech.TrackingSystem.ConsoleClient
             Part part1 = new Part(1, "Ekran LCD", 19.99m);
             Part part2 = new Part(2, "Klawiatura", 10);
 
-            Product product = new Product(1, "Domofon", "123456");
+            List<Part> parts = new List<Part>
+            {
+                part1,
+                part2
+            };
 
-            product.Parts.Add(part1);
-            product.Parts.Add(part2);
+           Item item = new Product(1, "Domofon", "123456", parts);
 
-            Order order = new Order(product, 5)
+            //Item item = new Service(1, "Instalacja software", 100);
+
+            Console.WriteLine(item.Calculate());
+
+            Console.WriteLine(item.ToString());
+
+        
+            Order order = new Order(item, 5)
             {
                 Id = 1, 
             };
 
-            order.Print();
+            order.Status = OrderStatus.Created;
 
-            Console.WriteLine(part1.ToString());
+            Console.WriteLine(order);
+
 
          //   Console.WriteLine($"Przyjęto zamówienie na {order.Product.Name} w ilości: {order.Quantity}");
         }

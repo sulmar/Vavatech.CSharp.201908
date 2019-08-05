@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Text;
 
 namespace Vavatech.TrackingSystem.Models
 {
-    public class Order
+    public class Order : BaseEntity
     {
-        public int Id { get; set; }
         public DateTime CreatedOn { get; set; }
         // public Nullable<DateTime> FinishedDate { get; set; }
         public DateTime? FinishedDate { get; set; }
@@ -19,6 +19,8 @@ namespace Vavatech.TrackingSystem.Models
                     return null;
             }
         }
+
+        public OrderStatus Status { get; set; }
 
         private bool isDone;
 
@@ -48,7 +50,7 @@ namespace Vavatech.TrackingSystem.Models
         //}
 
 
-        public Product Product { get; set; }
+        public Item Item { get; set; }
         public short Quantity { get; set; }
         public decimal HourlyRate { get; set; }
 
@@ -70,33 +72,63 @@ namespace Vavatech.TrackingSystem.Models
 
 
         // parametry opcjonalne
-        public Order(Product product, short quantity = 1)
+        public Order(Item item, short quantity = 1)
         {
             this.CreatedOn = DateTime.Now;
-            this.Product = product;
+            this.Item = item;
             this.Quantity = quantity;
+            this.Status = OrderStatus.Created;
         }
 
 
 
-        public void Print()
+        //public void Print()
+        //{
+        //    Console.WriteLine($"Zamówienie {Id}");
+        //    Console.WriteLine($"Data zam. {CreatedOn}");
+
+        //    if (FinishedDate.HasValue)
+        //    {
+        //        Console.WriteLine($"Data zak. {FinishedDate}");
+        //    }
+
+        //    // Console.WriteLine($"Produkt {Product.Name} {Product.Color}");
+        //    Console.WriteLine(Product);
+
+        //    Console.WriteLine($"Ilość {Quantity}");
+
+         
+        //}
+
+        public override string ToString()
         {
-            Console.WriteLine($"Zamówienie {Id}");
-            Console.WriteLine($"Data zam. {CreatedOn}");
+            StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine($"Zamówienie {Id}");
+            stringBuilder.AppendLine($"Data zam. {CreatedOn}");
 
             if (FinishedDate.HasValue)
             {
-                Console.WriteLine($"Data zak. {FinishedDate}");
+                stringBuilder.AppendLine($"Data zak. {FinishedDate}");
             }
 
             // Console.WriteLine($"Produkt {Product.Name} {Product.Color}");
-            Console.WriteLine(Product);
+            stringBuilder.AppendLine(Item.ToString());
 
-            Console.WriteLine($"Ilość {Quantity}");
+            stringBuilder.AppendLine($"Ilość {Quantity}");
 
-         
+            return stringBuilder.ToString();
         }
 
-     
+
     }
+
+    public enum OrderStatus 
+    {
+        Created,
+        InProduction,
+        Done,
+        Canceled
+    }
+
 }

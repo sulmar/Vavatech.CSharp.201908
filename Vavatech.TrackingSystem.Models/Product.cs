@@ -1,26 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Vavatech.TrackingSystem.Models
 {
-    public class Product
+    public abstract class Item : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
+
+        public Item(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
+        public override string ToString()
+        {
+            return $"ID: {Id} Nazwa: {Name}";
+        }
+
+        public virtual decimal Calculate()
+        {
+            return 0;
+        }
+    }
+
+    public class Service : Item
+    {
+        public Service(int id, string name, decimal unitPrice)
+            : base(id, name)
+        {
+            UnitPrice = unitPrice;
+        }
+        public decimal UnitPrice { get; set; }
+
+        public override string ToString()
+        {
+            return base.ToString() + $"Cena: {UnitPrice}";
+        }
+
+        public override decimal Calculate()
+        {
+            return UnitPrice;
+        }
+        
+    }
+
+    public class Product : Item
+    {
         public string SerialNumber { get; set; }
         public string Color { get; set; }
 
         public List<Part> Parts { get; set; }
 
-        public Product(int id, string name, string serialNumber, string color = "White")
+        public Product(int id, string name, string serialNumber, List<Part> parts, string color = "White")
+            : base(id, name)
         {
-            this.Id = id;
-            this.Name = name;
             this.SerialNumber = serialNumber;
             this.Color = color;
-
-            this.Parts = new List<Part>();
+            this.Parts = parts;
         }
 
         //public void Print()
@@ -42,7 +81,8 @@ namespace Vavatech.TrackingSystem.Models
         {
             StringBuilder stringBuilder = new StringBuilder();
 
-            stringBuilder.AppendLine($"Produkt {this.Name} {this.Color} {this.SerialNumber}");
+            stringBuilder.Append(base.ToString());
+            stringBuilder.AppendLine($"Kolor: {this.Color} S/N: {this.SerialNumber}");
 
             foreach (Part part in Parts)
             {
@@ -50,6 +90,21 @@ namespace Vavatech.TrackingSystem.Models
             }
 
             return stringBuilder.ToString();
+        }
+
+
+        public override decimal Calculate()
+        {
+            //decimal totalUnitPrice = 0;
+
+            //foreach (Part part in Parts)
+            //{
+            //    totalUnitPrice = totalUnitPrice + part.UnitPrice;
+            //}
+
+            //return totalUnitPrice;
+
+            return Parts.Sum(part => part.UnitPrice);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Vavatech.TrackingSystem.Models
 {
-    public class Part : object
+    public class Part : BaseEntity
     {
         public Part(int id, string description, decimal unitPrice)
         {
@@ -13,7 +13,6 @@ namespace Vavatech.TrackingSystem.Models
             UnitPrice = unitPrice;
         }
 
-        public int Id { get; set; }
         public string Description { get; set; }
         public decimal UnitPrice { get; set; }
 
