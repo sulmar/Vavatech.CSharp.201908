@@ -50,6 +50,7 @@ namespace Vavatech.TrackingSystem.Models
 
         public Product Product { get; set; }
         public short Quantity { get; set; }
+        public decimal HourlyRate { get; set; }
 
         // przeciążanie konstruktorów
 
@@ -80,7 +81,20 @@ namespace Vavatech.TrackingSystem.Models
 
         public void Print()
         {
-       
+            Console.WriteLine($"Zamówienie {Id}");
+            Console.WriteLine($"Data zam. {CreatedOn}");
+
+            if (FinishedDate.HasValue)
+            {
+                Console.WriteLine($"Data zak. {FinishedDate}");
+            }
+
+            // Console.WriteLine($"Produkt {Product.Name} {Product.Color}");
+            Console.WriteLine(Product);
+
+            Console.WriteLine($"Ilość {Quantity}");
+
+         
         }
 
      
