@@ -6,6 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Customers.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Customers.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Vavatech.TrackingSystem.Models\Vavatech.TrackingSystem.Models.csproj" />
   </ItemGroup>
 

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32.SafeHandles;
+using System;
 using System.Text;
 
 namespace Vavatech.TrackingSystem.Models
 {
+
     public class Order : BaseEntity
     {
         public DateTime CreatedOn { get; set; }
@@ -53,6 +55,7 @@ namespace Vavatech.TrackingSystem.Models
         public Item Item { get; set; }
         public short Quantity { get; set; }
         public decimal HourlyRate { get; set; }
+        public Customer Customer { get; set; }
 
         // przeciążanie konstruktorów
 
@@ -72,12 +75,13 @@ namespace Vavatech.TrackingSystem.Models
 
 
         // parametry opcjonalne
-        public Order(Item item, short quantity = 1)
+        public Order(Item item, Customer customer, short quantity = 1)
         {
             this.CreatedOn = DateTime.Now;
             this.Item = item;
             this.Quantity = quantity;
             this.Status = OrderStatus.Created;
+            this.Customer = customer;
         }
 
 
@@ -105,6 +109,7 @@ namespace Vavatech.TrackingSystem.Models
             StringBuilder stringBuilder = new StringBuilder();
 
             stringBuilder.AppendLine($"Zamówienie {Id}");
+            stringBuilder.AppendLine($"Klient: {Customer}");
             stringBuilder.AppendLine($"Data zam. {CreatedOn}");
 
             if (FinishedDate.HasValue)
