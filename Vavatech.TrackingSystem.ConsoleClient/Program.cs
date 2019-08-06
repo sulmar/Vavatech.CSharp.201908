@@ -11,6 +11,10 @@ namespace Vavatech.TrackingSystem.ConsoleClient
         {
             Console.WriteLine("Hello in Tracking System!");
 
+            IItemRepository itemRepository = new FileItemRepository("items.txt");
+
+            List<Item> items = itemRepository.Get();
+
             // CreateOrderTest();
 
             //List<Customer> customers = new List<Customer>()
@@ -24,7 +28,8 @@ namespace Vavatech.TrackingSystem.ConsoleClient
 
             //List<Customer> customers = customersLoader.Load("customers.txt");
 
-            ICustomerRepository customerRepository = new FileCustomerRepository("customers.txt");
+            // ICustomerRepository customerRepository = new FileCustomerRepository("customers.txt");
+            ICustomerRepository customerRepository = new FakeCustomerRepository();
 
             List<Customer> customers = customerRepository.Get();
 

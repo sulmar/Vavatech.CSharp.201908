@@ -16,6 +16,8 @@ namespace Vavatech.TrackingSystem.Models
         public string Description { get; set; }
         public decimal UnitPrice { get; set; }
 
+        public List<Product> Products { get; set; }
+
         //public void Print()
         //{
         //    Console.WriteLine($"{Description} {UnitPrice}");

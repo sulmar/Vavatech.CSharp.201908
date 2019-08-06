@@ -5,6 +5,61 @@ using Vavatech.TrackingSystem.Models;
 
 namespace Vavatech.TrackingSystem.ConsoleClient
 {
+    public class FileItemRepository : IItemRepository
+    {
+        private readonly string filename;
+
+        public FileItemRepository(string filename)
+        {
+            this.filename = filename;
+        }
+
+        public void Add(Item entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Item> Get()
+        {
+            return Load(filename);
+        }
+
+        private List<Item> Load(string filename)
+        {
+            string[] lines = File.ReadAllLines(filename);
+
+            List<Item> items = new List<Item>();
+
+            foreach (string line in lines)
+            {
+                string[] columns = line.Split(',');
+
+                string itemType = columns[0];
+
+                IItemConverter itemConverter = ItemFactory.GetConverter(itemType);
+                Item item = itemConverter.Convert(columns);
+                items.Add(item);
+            }
+
+            return items;
+        }
+
+        public Item Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Item entity)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class FileCustomerRepository : ICustomerRepository
     {
         private readonly string filename;
@@ -63,6 +118,11 @@ namespace Vavatech.TrackingSystem.ConsoleClient
         }
 
         public void Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Customer> Get(string city)
         {
             throw new NotImplementedException();
         }

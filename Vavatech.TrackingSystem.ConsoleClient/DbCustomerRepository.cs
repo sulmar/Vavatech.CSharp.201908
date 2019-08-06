@@ -20,6 +20,11 @@ namespace Vavatech.TrackingSystem.ConsoleClient
             throw new System.NotImplementedException();
         }
 
+        public List<Customer> Get(string city)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void Remove(int id)
         {
             throw new System.NotImplementedException();

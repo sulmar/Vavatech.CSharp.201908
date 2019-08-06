@@ -25,6 +25,11 @@ namespace Vavatech.TrackingSystem.Models
     }
     public class Customer : BaseEntity
     {
+        public Customer()
+        {
+
+        }
+
         public Customer(int id, string firstName, string lastName)
         {
             Id = id;
@@ -38,6 +43,7 @@ namespace Vavatech.TrackingSystem.Models
         public Address HomeAddress { get; set; }
         public Address WorkAddress { get; set; }
         public Address InvoiceAddress { get; set; }
+        public bool IsRemoved { get; set; }
 
 
         public bool HasHomeAddress

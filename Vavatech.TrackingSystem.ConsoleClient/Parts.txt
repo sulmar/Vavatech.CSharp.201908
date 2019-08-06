@@ -1,0 +1,4 @@
+﻿1, Ekran LCD, 19.99, 1
+2, Klawiatura, 10, 1,
+3, Klucz, 20, 2
+

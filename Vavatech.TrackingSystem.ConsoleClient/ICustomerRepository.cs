@@ -4,12 +4,32 @@ using Vavatech.TrackingSystem.Models;
 
 namespace Vavatech.TrackingSystem.ConsoleClient
 {
-    interface ICustomerRepository
+    interface ICustomerRepository : IEntityRepository<Customer>
     {
-        List<Customer> Get();
-        Customer Get(int id);
-        void Add(Customer customer);
-        void Update(Customer customer);
+        List<Customer> Get(string city);
+    }
+
+
+    // Interfejs generyczny
+    interface IEntityRepository<TEntity>
+    {
+        List<TEntity> Get();
+        TEntity Get(int id);
+        void Add(TEntity entity);
+        void Update(TEntity entity);
         void Remove(int id);
     }
+
+    interface IItemRepository : IEntityRepository<Item>
+    {
+
+    }
+
+    interface IOrderRepository : IEntityRepository<Order>
+    {
+
+    }
+
+
+
 }

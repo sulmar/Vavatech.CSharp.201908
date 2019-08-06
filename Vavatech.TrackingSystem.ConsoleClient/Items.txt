@@ -1,0 +1,3 @@
+﻿Product, 1, "Domofon", 123456
+Product, 2, "Zamek", 656546
+Service, 1, "Instalacja software", 100

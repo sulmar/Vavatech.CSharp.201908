@@ -7,12 +7,20 @@
 
   <ItemGroup>
     <None Remove="Customers.txt" />
+    <None Remove="Items.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Customers.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Items.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="28.0.2" />
   </ItemGroup>
 
   <ItemGroup>

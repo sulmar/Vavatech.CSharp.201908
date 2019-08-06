@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Vavatech.TrackingSystem.ConsoleClient.Fakers;
 using Vavatech.TrackingSystem.Models;
 
 namespace Vavatech.TrackingSystem.ConsoleClient
@@ -11,12 +12,16 @@ namespace Vavatech.TrackingSystem.ConsoleClient
         // snippet: ctor
         public FakeCustomerRepository()
         {
-            customers = new List<Customer>()
-            {
-                new Customer (1, "John", "Smith"),
-                new Customer (2, "Ann", "Smith"),
-                new Customer (3, "Peter", "Novak"),
-            };
+            CustomerFaker customerFaker = new CustomerFaker();
+
+            customers = customerFaker.Generate(1000);
+
+            //customers = new List<Customer>()
+            //{
+            //    new Customer (1, "John", "Smith"),
+            //    new Customer (2, "Ann", "Smith"),
+            //    new Customer (3, "Peter", "Novak"),
+            //};
         }
 
         public void Add(Customer customer)
@@ -30,6 +35,11 @@ namespace Vavatech.TrackingSystem.ConsoleClient
         }
 
         public Customer Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Customer> Get(string city)
         {
             throw new NotImplementedException();
         }
