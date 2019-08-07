@@ -16,7 +16,7 @@ namespace Vavatech.TrackingSystem.Models
             get
             {
                 if (FinishedDate.HasValue)
-                    return CreatedOn.Subtract(FinishedDate.Value);
+                    return FinishedDate.Value.Subtract(CreatedOn);
                 else
                     return null;
             }

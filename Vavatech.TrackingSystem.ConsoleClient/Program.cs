@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Vavatech.TrackingSystem.Models;
 
 namespace Vavatech.TrackingSystem.ConsoleClient
@@ -11,18 +12,85 @@ namespace Vavatech.TrackingSystem.ConsoleClient
         {
             Console.WriteLine("Hello in Tracking System!");
 
+            // CreateOrderTest();
+
+            // RepositoryTest();
+
+            ProcessorTest();
+
+
+
+            //   Console.WriteLine($"Przyjęto zamówienie na {order.Product.Name} w ilości: {order.Quantity}");
+        }
+
+        private static void ProcessorTest()
+        {
+            Order order = CreateOrderTest();
+
+            if (order.Item is Product)
+            {
+                Product product = (Product) order.Item;
+
+                List<Operation> operations = new List<Operation>
+                {
+                    new AssemblyOperation(),
+                    new BoxOperation(),
+                    new TestOperation(),
+                    new MarkOperation()
+                };
+
+                Process process = new Process
+                {
+                    Name = "Produkcja domofonu",
+                    Version = "1.0",
+                    Product = product,
+                    Operations = operations
+                };
+
+                Processor processor = new Processor();
+
+                processor.OperationDone += Report;
+                processor.OperationBegin += Processor_OperationBegin;
+
+
+                // processor.OperationDone.Invoke();
+
+                order.Status = OrderStatus.InProduction;
+
+                for (int i = 0; i < order.Quantity; i++)
+                {
+                    processor.Make(product, process);
+                }
+
+                order.Status = OrderStatus.Done;
+                order.FinishedDate = DateTime.Now;
+
+                Console.WriteLine($"Czas realizacji: {order.Period}" );
+
+            }
+            else
+            {
+                Console.WriteLine("Realizacja usługi");
+            }
+
+         
+        }
+
+        private static void Processor_OperationBegin(object sender, OperationEventArgs e)
+        {
+            Console.WriteLine($"Data rozp. {e.BeginDate} przez {sender}");
+        }
+
+        private static void Report(string name)
+       {
+            Console.WriteLine($"Wykonano operację {name}.");
+       }
+
+        private static void RepositoryTest()
+        {
             IItemRepository itemRepository = new FileItemRepository("items.txt");
 
             List<Item> items = itemRepository.Get();
-
-            // CreateOrderTest();
-
-            //List<Customer> customers = new List<Customer>()
-            //{
-            //    new Customer (1, "John", "Smith"),
-            //    new Customer (2, "Ann", "Smith"),
-            //    new Customer (3, "Peter", "Novak"),
-            //};
 
             //CustomersLoader customersLoader = new CustomersLoader();
 
@@ -39,13 +107,9 @@ namespace Vavatech.TrackingSystem.ConsoleClient
             {
                 Console.WriteLine(customer);
             }
-
-
-
-            //   Console.WriteLine($"Przyjęto zamówienie na {order.Product.Name} w ilości: {order.Quantity}");
         }
 
-        private static void CreateOrderTest()
+        private static Order CreateOrderTest()
         {
             Part part1 = new Part(1, "Ekran LCD", 19.99m);
             Part part2 = new Part(2, "Klawiatura", 10);
@@ -78,6 +142,8 @@ namespace Vavatech.TrackingSystem.ConsoleClient
             order.Status = OrderStatus.Created;
 
             Console.WriteLine(order);
+
+            return order;
         }
     }
 }
