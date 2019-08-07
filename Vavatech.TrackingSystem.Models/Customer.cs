@@ -7,6 +7,10 @@ namespace Vavatech.TrackingSystem.Models
 
     public class Address : Base
     {
+        public Address()
+        {
+
+        }
         public Address(string city, string street, string postCode)
         {
             City = city;
@@ -18,10 +22,7 @@ namespace Vavatech.TrackingSystem.Models
         public string Street { get; set; }
         public string PostCode { get; set; }
 
-        public override string ToString()
-        {
-            return $"{Street} {PostCode} {City}";
-        }
+        public override string ToString() => $"{Street} {PostCode} {City}";
     }
     public class Customer : BaseEntity
     {
@@ -45,39 +46,19 @@ namespace Vavatech.TrackingSystem.Models
         public Address InvoiceAddress { get; set; }
         public bool IsRemoved { get; set; }
 
+        public bool HasHomeAddress => HomeAddress != null;
+        public bool HasWorkAddress => WorkAddress != null;
+        public bool HasInvoiceAddress => InvoiceAddress != null;
 
-        public bool HasHomeAddress
-        {
-            get
-            {
-                return HomeAddress != null;
-            }
-        }
+        //public string FullName
+        //{
+        //    get
+        //    {
+        //        return $"{FirstName} {LastName}";
+        //    }
+        //}
 
-        public bool HasWorkAddress
-        {
-            get
-            {
-                return WorkAddress != null;
-            }
-        }
-
-        public bool HasInvoiceAddress
-        {
-            get
-            {
-                return InvoiceAddress != null;
-            }
-        }
-
-        public string FullName
-        {
-            get
-            {
-                return $"{FirstName} {LastName}";
-            }
-        }
-
+        public string FullName => $"{FirstName} {LastName}";
 
         public override string ToString()
         {

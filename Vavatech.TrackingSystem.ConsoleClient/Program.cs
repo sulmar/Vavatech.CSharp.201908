@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using System.Reflection.Metadata;
+using System.Security.Authentication;
 using Vavatech.TrackingSystem.Models;
 
 namespace Vavatech.TrackingSystem.ConsoleClient
@@ -16,11 +19,68 @@ namespace Vavatech.TrackingSystem.ConsoleClient
 
             // RepositoryTest();
 
-            ProcessorTest();
+            // ProcessorTest();
 
+            LinqTest();
+
+
+            VarTest();
+
+            DynamicTest();
 
 
             //   Console.WriteLine($"Przyjęto zamówienie na {order.Product.Name} w ilości: {order.Quantity}");
+        }
+
+        private static void VarTest()
+        {
+            var age = 10;
+
+            var message = "Hello World";
+
+            var sign = 'a';
+
+            var signs = new char[] { 'a', 'b', 'c' };
+
+            var customer = new Customer(1, "John", "Smith");
+
+
+            // Typ anonimowy
+            var person = new { FirstName = "Marcin", LastName = "Sulecki" };
+
+            Console.WriteLine(person.FirstName);
+
+
+            Console.WriteLine(message);
+        }
+
+        private static void DynamicTest()
+        {
+            dynamic customer = new Customer(1, "John", "Smith");
+
+            Console.WriteLine(customer.FirstName);
+
+            customer = "Janek";
+        }
+
+        private static void LinqTest()
+        {
+            ICustomerRepository customerRepository = new FakeCustomerRepository();
+
+            var customers = customerRepository.Get("A");
+
+            foreach (var cust in customers)
+            {
+                Console.WriteLine(cust);
+            }
+
+            var cities = customers
+                .Where( c => !c.IsRemoved)
+                .Select(c => new { Imie = c.FirstName, Nazwisko = c.LastName, c.HomeAddress.City });
+
+            Customer customer = customerRepository.Get(10);
+
+            Console.WriteLine(customer);
         }
 
         private static void ProcessorTest()

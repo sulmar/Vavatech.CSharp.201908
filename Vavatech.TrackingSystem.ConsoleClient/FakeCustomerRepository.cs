@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32.SafeHandles;
+using System;
 using System.Collections.Generic;
 using Vavatech.TrackingSystem.ConsoleClient.Fakers;
 using Vavatech.TrackingSystem.Models;
+using System.Linq;
 
 namespace Vavatech.TrackingSystem.ConsoleClient
 {
@@ -12,7 +14,7 @@ namespace Vavatech.TrackingSystem.ConsoleClient
         // snippet: ctor
         public FakeCustomerRepository()
         {
-            CustomerFaker customerFaker = new CustomerFaker();
+            CustomerFaker customerFaker = new CustomerFaker(new AddressFaker());
 
             customers = customerFaker.Generate(1000);
 
@@ -34,15 +36,46 @@ namespace Vavatech.TrackingSystem.ConsoleClient
             return customers;
         }
 
-        public Customer Get(int id)
-        {
-            throw new NotImplementedException();
-        }
+        //public Customer Get(int id)
+        //{
+        //    Customer result = null;
 
-        public List<Customer> Get(string city)
-        {
-            throw new NotImplementedException();
-        }
+        //    foreach (Customer customer in customers)
+        //    {
+        //        if (customer.Id == id)
+        //        {
+        //            result = customer;
+        //            break;
+        //        }
+        //    }
+
+        //    return result;
+
+        //}
+
+        public Customer Get(int id) => customers.FirstOrDefault(c => c.Id == id);
+
+        //public List<Customer> Get(string city)
+        //{
+        //    List<Customer> results = new List<Customer>();
+
+        //    foreach (Customer customer in customers)
+        //    {
+        //        if (customer.HomeAddress.City.StartsWith(city))
+        //        {
+        //            results.Add(customer);
+        //        }
+        //    }
+
+        //    return results;
+        //}
+
+        public List<Customer> Get(string city) => customers
+                    .Where(c => c.HomeAddress.City.StartsWith(city))
+                    .OrderBy(c => c.LastName)
+                    .ToList();
+        
+
 
         public void Remove(int id)
         {

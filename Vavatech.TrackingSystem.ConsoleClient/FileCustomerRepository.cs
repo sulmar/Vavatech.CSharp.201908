@@ -9,10 +9,7 @@ namespace Vavatech.TrackingSystem.ConsoleClient
     {
         private readonly string filename;
 
-        public FileItemRepository(string filename)
-        {
-            this.filename = filename;
-        }
+        public FileItemRepository(string filename) => this.filename = filename;
 
         public void Add(Item entity)
         {

@@ -35,10 +35,19 @@ namespace Vavatech.TrackingSystem.ConsoleClient
             foreach (Operation operation in process.Operations)
             {
                 operation.Log = LogConsole;
+
                 operation.Log += LogColorConsole;
 
-                operation.Log -= LogColorConsole;
-                operation.Log = null;
+                // Metoda anonimowa
+                operation.Log += delegate (string text)
+                {
+                    Console.WriteLine($">>> {text}");
+                };
+
+                operation.Log += msg => Console.WriteLine($"=> {msg}");
+
+               // operation.Log -= LogColorConsole;
+                // operation.Log = null;
 
                 // operation.Log = Send;
 
