@@ -4,7 +4,7 @@ using System.IO;
 using Vavatech.TrackingSystem.IRepositories;
 using Vavatech.TrackingSystem.Models;
 
-namespace Vavatech.TrackingSystem.ConsoleClient
+namespace Vavatech.TrackingSystem.FileRepositories
 {
     public class FileItemRepository : IItemRepository
     {

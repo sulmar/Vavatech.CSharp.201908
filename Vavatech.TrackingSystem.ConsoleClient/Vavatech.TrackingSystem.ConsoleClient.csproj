@@ -24,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vavatech.TrackingSystem.DbRepositories\Vavatech.TrackingSystem.DbRepositories.csproj" />
+    <ProjectReference Include="..\Vavatech.TrackingSystem.FakeRepositories\Vavatech.TrackingSystem.FakeRepositories.csproj" />
+    <ProjectReference Include="..\Vavatech.TrackingSystem.FileRepositories\Vavatech.TrackingSystem.FileRepositories.csproj" />
     <ProjectReference Include="..\Vavatech.TrackingSystem.IRepositories\Vavatech.TrackingSystem.IRepositories.csproj" />
     <ProjectReference Include="..\Vavatech.TrackingSystem.Models\Vavatech.TrackingSystem.Models.csproj" />
   </ItemGroup>

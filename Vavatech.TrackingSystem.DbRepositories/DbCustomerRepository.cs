@@ -2,7 +2,7 @@
 using Vavatech.TrackingSystem.IRepositories;
 using Vavatech.TrackingSystem.Models;
 
-namespace Vavatech.TrackingSystem.ConsoleClient
+namespace Vavatech.TrackingSystem.DbRepositories
 {
     public class DbCustomerRepository : ICustomerRepository
     {

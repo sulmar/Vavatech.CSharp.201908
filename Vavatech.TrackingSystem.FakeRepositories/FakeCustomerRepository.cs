@@ -6,7 +6,7 @@ using Vavatech.TrackingSystem.Models;
 using System.Linq;
 using Vavatech.TrackingSystem.IRepositories;
 
-namespace Vavatech.TrackingSystem.ConsoleClient
+namespace Vavatech.TrackingSystem.FakeRepositories
 {
     public class FakeCustomerRepository : ICustomerRepository
     {
