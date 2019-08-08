@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Vavatech.TrackingSystem.IRepositories;
 using Vavatech.TrackingSystem.Models;
 
 namespace Vavatech.TrackingSystem.ConsoleClient

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Vavatech.TrackingSystem.ConsoleClient.Fakers;
 using Vavatech.TrackingSystem.Models;
 using System.Linq;
+using Vavatech.TrackingSystem.IRepositories;
 
 namespace Vavatech.TrackingSystem.ConsoleClient
 {

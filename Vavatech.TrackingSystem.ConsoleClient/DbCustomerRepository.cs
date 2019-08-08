@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Vavatech.TrackingSystem.IRepositories;
 using Vavatech.TrackingSystem.Models;
 
 namespace Vavatech.TrackingSystem.ConsoleClient

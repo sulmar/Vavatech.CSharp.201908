@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Variables", "Variables\Vari
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arrays", "Arrays\Arrays.csproj", "{A92A0132-E4F2-4C77-BA87-3DAFBAA12DD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.TrackingSystem.ConsoleClient", "Vavatech.TrackingSystem.ConsoleClient\Vavatech.TrackingSystem.ConsoleClient.csproj", "{F81DDE61-9260-4818-B01C-05CD7815A249}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vavatech.TrackingSystem.ConsoleClient", "Vavatech.TrackingSystem.ConsoleClient\Vavatech.TrackingSystem.ConsoleClient.csproj", "{F81DDE61-9260-4818-B01C-05CD7815A249}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.TrackingSystem.Models", "Vavatech.TrackingSystem.Models\Vavatech.TrackingSystem.Models.csproj", "{6B3AABF0-92F3-4F15-BAA6-9FA2B394A64D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vavatech.TrackingSystem.Models", "Vavatech.TrackingSystem.Models\Vavatech.TrackingSystem.Models.csproj", "{6B3AABF0-92F3-4F15-BAA6-9FA2B394A64D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.TrackingSystem.IRepositories", "Vavatech.TrackingSystem.IRepositories\Vavatech.TrackingSystem.IRepositories.csproj", "{CE307512-1600-4EB9-AE07-C35E19BE8EF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6B3AABF0-92F3-4F15-BAA6-9FA2B394A64D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B3AABF0-92F3-4F15-BAA6-9FA2B394A64D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B3AABF0-92F3-4F15-BAA6-9FA2B394A64D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE307512-1600-4EB9-AE07-C35E19BE8EF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE307512-1600-4EB9-AE07-C35E19BE8EF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE307512-1600-4EB9-AE07-C35E19BE8EF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE307512-1600-4EB9-AE07-C35E19BE8EF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
