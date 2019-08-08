@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Vavatech.TrackingSystem.IRepositories;
 using Vavatech.TrackingSystem.Models;
+using Vavatech.TrackingSystem.Models.SearchCriterias;
 
 namespace Vavatech.TrackingSystem.FileRepositories
 {
@@ -121,6 +122,11 @@ namespace Vavatech.TrackingSystem.FileRepositories
         }
 
         public List<Customer> Get(string city)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Customer> Get(CustomerSearchCriteria criteria)
         {
             throw new NotImplementedException();
         }

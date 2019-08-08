@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using Vavatech.TrackingSystem.Models;
 
@@ -29,6 +32,46 @@ namespace Vavatech.TrackingSystem.ConsoleClient
         public delegate void LogDelegate(string message);
 
         public LogDelegate Log;
+
+
+        public void Build()
+        {
+
+            // process.Operations
+
+            Queue<Operation> todo = new Queue<Operation>();
+
+            todo.Enqueue(new AssemblyOperation());
+            todo.Enqueue(new BoxOperation());
+            todo.Enqueue(new MarkOperation());
+
+            while(todo.Any())
+            {
+
+                Operation operation1 = todo.Peek();
+
+                Operation operation = todo.Dequeue();
+
+                Console.WriteLine(operation);
+            }
+          
+        }
+
+        public void Build2()
+        {
+            Stack<Operation> todo = new Stack<Operation>();
+
+            todo.Push(new AssemblyOperation());
+            todo.Push(new BoxOperation());
+            todo.Push(new MarkOperation());
+
+            while (todo.Any())
+            {
+                Operation operation = todo.Pop();
+
+                Console.WriteLine(operation);
+            }
+        }
 
         public void Make(Product product, Process process)
         {

@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Vavatech.Sortation.Models\Vavatech.Sortation.Models.csproj" />
+  </ItemGroup>
+
 </Project>

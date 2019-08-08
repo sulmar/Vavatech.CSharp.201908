@@ -5,9 +5,51 @@ using Vavatech.TrackingSystem.ConsoleClient.Fakers;
 using Vavatech.TrackingSystem.Models;
 using System.Linq;
 using Vavatech.TrackingSystem.IRepositories;
+using Vavatech.TrackingSystem.Models.SearchCriterias;
+using System.Collections;
+using Bogus;
+using System.Transactions;
 
 namespace Vavatech.TrackingSystem.FakeRepositories
 {
+    public class FakeProductRepository : FakeEntityRepository<Product>
+    {
+        public FakeProductRepository(Faker<Product> faker) : base(faker)
+        {
+        }
+
+        public override void Remove(int id)
+        {
+            throw new NotSupportedException();
+        }
+    }
+
+    public class FakeEntityRepository<TEntity> : IEntityRepository<TEntity>
+        where TEntity : BaseEntity
+    {
+
+        protected List<TEntity> entities;
+
+        public FakeEntityRepository(Faker<TEntity> faker)
+        {
+            entities = faker.Generate(100);
+        }
+        public virtual void Add(TEntity entity) => entities.Add(entity);
+
+        public virtual List<TEntity> Get() => entities;
+
+        public virtual TEntity Get(int id) => entities.FirstOrDefault(e => e.Id == id);
+
+        public virtual void Remove(int id) => entities.Remove(Get(id));
+
+        public virtual void Update(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+       
+    }
+
     public class FakeCustomerRepository : ICustomerRepository
     {
         private readonly List<Customer> customers;
@@ -74,9 +116,35 @@ namespace Vavatech.TrackingSystem.FakeRepositories
         public List<Customer> Get(string city) => customers
                     .Where(c => c.HomeAddress.City.StartsWith(city))
                     .OrderBy(c => c.LastName)
+                    .ThenBy(c => c.FirstName)
                     .ToList();
-        
 
+        public List<Customer> Get(CustomerSearchCriteria criteria)
+        {
+            IEnumerable<Customer> results = customers;
+
+            if (!string.IsNullOrEmpty(criteria.City))
+            {
+                results = results.Where(c => c.HomeAddress.City == criteria.City);
+            }
+
+            if (!string.IsNullOrEmpty(criteria.FirstName))
+            {
+                results = results.Where(c => c.FirstName.StartsWith(criteria.FirstName));
+            }
+
+            if (!string.IsNullOrEmpty(criteria.LastName))
+            {
+                results = results.Where(c => c.LastName.StartsWith(criteria.LastName));
+            }
+
+            if (criteria.IsRemoved.HasValue)
+            {
+                results = results.Where(c => c.IsRemoved == criteria.IsRemoved);
+            }
+
+            return results.ToList();
+        }
 
         public void Remove(int id)
         {

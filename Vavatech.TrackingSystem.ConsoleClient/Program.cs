@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Security.Authentication;
+using Vavatech.TrackingSystem.ConsoleClient.Helpers;
 using Vavatech.TrackingSystem.FakeRepositories;
 using Vavatech.TrackingSystem.FileRepositories;
 using Vavatech.TrackingSystem.IRepositories;
@@ -18,21 +19,61 @@ namespace Vavatech.TrackingSystem.ConsoleClient
         {
             Console.WriteLine("Hello in Tracking System!");
 
+            QueueTest();
+
+           // ExtensionMethodsTest();
+
+            GroupByCountTest();
+
+            // GroupByTest();
+
             // CreateOrderTest();
 
             // RepositoryTest();
 
             // ProcessorTest();
 
-            LinqTest();
+            //  LinqTest();
 
 
-            VarTest();
+            //  VarTest();
 
-            DynamicTest();
+            //  DynamicTest();
 
 
             //   Console.WriteLine($"Przyjęto zamówienie na {order.Product.Name} w ilości: {order.Quantity}");
+        }
+
+        private static void QueueTest()
+        {
+            Processor processor = new Processor();
+            processor.Build();
+            processor.Build2();
+        }
+
+        private static void ExtensionMethodsTest()
+        {
+            Order order = CreateOrderTest();
+
+            if (order.CreatedOn.DayOfWeek == DayOfWeek.Saturday ||
+                order.CreatedOn.DayOfWeek == DayOfWeek.Sunday)
+            {
+
+            }
+
+            if (DateTimeHelper.IsHoliday(order.CreatedOn))
+            {
+
+            }
+
+            if (order.CreatedOn.IsHoliday())
+            {
+
+            }
+
+
+
+            DateTime dueDate = order.CreatedOn.AddWorkDays(5);
         }
 
         private static void VarTest()
@@ -66,7 +107,52 @@ namespace Vavatech.TrackingSystem.ConsoleClient
             customer = "Janek";
         }
 
-        private static void LinqTest()
+        private static void GroupByTest()
+        {
+            ICustomerRepository customerRepository = new FakeCustomerRepository();
+
+            List<Customer> customers = customerRepository.Get();
+
+            var groups = customers
+                .GroupBy(c => c.IsRemoved)
+                .ToList();
+
+            foreach (var group in groups)
+            {
+                Console.WriteLine("======================");
+                Console.WriteLine($"Grupa: {group.Key}");
+
+                foreach (var customer in group)
+                {
+                    Console.WriteLine(customer.FirstName);
+                }
+            }
+
+
+        }
+
+        private static void GroupByCountTest()
+        {
+            ICustomerRepository customerRepository = new FakeCustomerRepository();
+
+            List<Customer> customers = customerRepository.Get();
+
+            var groups = customers
+                .GroupBy(c => c.IsRemoved)
+                .Select(g => new { IsRemoved = g.Key, Quantity = g.Count() })
+                .ToList();
+
+
+            foreach (var group in groups)
+            {
+                Console.WriteLine($"Grupa {group.IsRemoved} ilość: {group.Quantity}");
+            }
+
+
+        }
+
+
+       private static void LinqTest()
         {
             ICustomerRepository customerRepository = new FakeCustomerRepository();
 
