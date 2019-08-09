@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Vavatech.TrackingSystem.Models
@@ -24,6 +25,9 @@ namespace Vavatech.TrackingSystem.Models
 
         public override string ToString() => $"{Street} {PostCode} {City}";
     }
+
+
+    [DebuggerDisplay("Customer: {FirstName} {LastName}")]
     public class Customer : BaseEntity
     {
         public Customer()

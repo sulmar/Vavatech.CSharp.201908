@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -33,7 +34,7 @@ namespace Vavatech.TrackingSystem.Models
         public string SerialNumber { get; set; }
         public string Color { get; set; }
 
-        public List<Part> Parts { get; set; }
+        public IReadOnlyList<Part> Parts { get; set; }
 
         public Product(int id, string name, string serialNumber, List<Part> parts, string color = "White")
             : base(id, name)

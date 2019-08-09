@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,6 +27,33 @@ namespace Vavatech.TrackingSystem.ConsoleClient
         static async Task Main(string[] args)
         {
             Console.WriteLine("Hello in Tracking System!");
+
+            ICustomerRepository customerRepository = new FakeCustomerRepository();
+
+            
+            IReadOnlyCollection<Customer> customers = customerRepository.Get();
+
+            if (customers.Any(c=>c.IsRemoved))
+            {
+
+            }
+
+            if (customers.Where(c=>c.IsRemoved).Any())
+            {
+
+            }
+
+            // customers[0].FirstName = "Marcin";
+
+            // customers.Add(new Customer());
+
+            // customers[0]
+
+            foreach (var customer in customers)
+            {
+                customer.FirstName = "Marcin";
+                Console.WriteLine(customers);
+            }
 
             FlagTest();
 
