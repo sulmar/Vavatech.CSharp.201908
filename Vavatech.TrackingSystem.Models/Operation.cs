@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using Vavatech.TrackingSystem.Models.Exceptions;
 
 namespace Vavatech.TrackingSystem.Models
 {
@@ -52,7 +53,7 @@ namespace Vavatech.TrackingSystem.Models
 
             Log?.Invoke($"Składanie {product.Name}...");
 
-            TimeSpan operationTime = TimeSpan.FromSeconds(random.Next(10));
+            TimeSpan operationTime = TimeSpan.FromSeconds(random.Next(2, 10));
 
             Thread.Sleep(operationTime);
 
@@ -77,6 +78,9 @@ namespace Vavatech.TrackingSystem.Models
         public override void Execute(Product product)
         {
             Log?.Invoke($"Pakowanie {product.Name}...");
+
+            throw new OperationException(this, "Błąd komunikacji ze sterownikiem pakowania.");
+
             Thread.Sleep(TimeSpan.FromSeconds(5));
             Log?.Invoke("Spakowano");
         }

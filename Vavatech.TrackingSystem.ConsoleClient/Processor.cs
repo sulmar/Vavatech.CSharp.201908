@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Bogus.DataSets;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using Vavatech.TrackingSystem.Models;
 
 namespace Vavatech.TrackingSystem.ConsoleClient
@@ -73,8 +76,27 @@ namespace Vavatech.TrackingSystem.ConsoleClient
             }
         }
 
+        /// <summary>
+        /// Utwórz produkt na podstawie procesu
+        /// </summary>
+        /// <param name="product">Produkt</param>
+        /// <param name="process">Proces produkcyjny</param>
+        /// <exception cref="OperationException">Operation Exception</exception>
+        /// 
         public void Make(Product product, Process process)
         {
+            if (product == null)
+                throw new ArgumentNullException(nameof(product));
+
+            if (process == null)
+                throw new ArgumentNullException(nameof(process));
+
+            if (!process.Operations.Any())
+            {
+                throw new InvalidOperationException("Brak operacji");
+            }
+
+
             foreach (Operation operation in process.Operations)
             {
                 operation.Log = LogConsole;
@@ -106,8 +128,17 @@ namespace Vavatech.TrackingSystem.ConsoleClient
             }
         }
 
+        public Task<decimal> CalculateStandardCostAsync(TimeSpan time)
+        {
+            return Task.Run(() => CalculateStandardCost(time));
+        }
+
         public decimal CalculateStandardCost(TimeSpan time)
         {
+            Log?.Invoke("Calculating...");
+            Thread.Sleep(TimeSpan.FromSeconds(5));
+            Log?.Invoke("Calculated.");
+
             return (decimal)time.TotalSeconds * 100;
         }
 
